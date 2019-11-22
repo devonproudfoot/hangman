@@ -16,6 +16,7 @@ class HangmanGame:
       self.display_board()
       self.is_winner()
       self.guess_letter()
+      print('\n')
     print('Sorry, you lose! The answer was {}'.format(self.word_to_guess))
     sys.exit()
 
