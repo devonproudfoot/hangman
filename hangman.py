@@ -10,6 +10,7 @@ class HangmanGame:
     self.guessed_letters = []
     for letter in self.word_to_guess:
       self.guessed_letters.append({'letter': letter, 'status' : False})
+    self.play_game()
     
   def play_game(self):
     while self.remaining_guesses > 0:
@@ -71,4 +72,3 @@ class HangmanGame:
 if __name__ == "__main__":
   word_to_guess = getpass('Please enter a word for the opponent to guess: ')
   new_game = HangmanGame(word_to_guess)
-  new_game.play_game()
