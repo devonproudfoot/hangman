@@ -14,10 +14,11 @@ class HangmanGame:
     
   def play_game(self):
     while self.remaining_guesses > 0:
+      print('You have guessed: {}\n'.format(self.letters_guessed))
       self.display_board()
       self.is_winner()
       self.guess_letter()
-      print('\n')
+      print('\n- - - - - - - - - - - - - - - - - - - -')
     print('Sorry, you lose! The answer was {}'.format(self.word_to_guess))
     sys.exit()
 
@@ -45,6 +46,7 @@ class HangmanGame:
       self.letters_guessed.append(letter)
     else:
       self.remaining_guesses -= 1
+      self.letters_guessed.append(letter)
       print('Wrong! You have {} guesses left!'.format(self.remaining_guesses))
 
   def add_to_board(self, letter):
