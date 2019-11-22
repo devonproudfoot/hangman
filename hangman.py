@@ -2,8 +2,8 @@ import sys
 from getpass import getpass
 
 class HangmanGame:
-  letters_guessed = []
-  remaining_guesses = 6
+  _letters_guessed = []
+  _remaining_guesses = 6
   
   def __init__(self, word_to_guess):
     self.word_to_guess = word_to_guess
@@ -13,8 +13,8 @@ class HangmanGame:
     self._play_game()
     
   def _play_game(self):
-    while self.remaining_guesses > 0:
-      print('You have guessed: {}\n'.format(self.letters_guessed))
+    while self._remaining_guesses > 0:
+      print('You have guessed: {}\n'.format(self._letters_guessed))
       self._display_board()
       self._is_winner()
       self._guess_letter()
@@ -39,15 +39,15 @@ class HangmanGame:
 
     if self._incorrect_value(letter):
       print('{} is not a letter!'.format(letter))
-    elif letter in self.letters_guessed:
+    elif letter in self._letters_guessed:
       print('You already guessed {}!'.format(letter))
     elif letter in word_to_guess:
       self._add_to_board(letter)
-      self.letters_guessed.append(letter)
+      self._letters_guessed.append(letter)
     else:
-      self.remaining_guesses -= 1
-      self.letters_guessed.append(letter)
-      print('Wrong! You have {} guesses left!'.format(self.remaining_guesses))
+      self._remaining_guesses -= 1
+      self._letters_guessed.append(letter)
+      print('Wrong! You have {} guesses left!'.format(self._remaining_guesses))
 
   def _add_to_board(self, letter):
     for indx, character in enumerate(self.word_to_guess):
