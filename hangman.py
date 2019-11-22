@@ -33,7 +33,10 @@ class HangmanGame:
 
   def guess_letter(self):
     letter = input('Please guess a letter: ').lower()
-    if letter in self.letters_guessed:
+
+    if self.incorrect_value(letter):
+      print('{} is not a letter!'.format(letter))
+    elif letter in self.letters_guessed:
       print('You already guessed {}!'.format(letter))
     elif letter in word_to_guess:
       self.add_to_board(letter)
@@ -46,6 +49,12 @@ class HangmanGame:
     for indx, character in enumerate(self.word_to_guess):
       if character == letter:
         self.guessed_letters[indx]['status'] = True
+
+  def incorrect_value(self, letter):
+    if not letter.isalpha() or len(letter) > 1:
+      return True
+    else:
+      return False
 
   def display_board(self):
     board = []
