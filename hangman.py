@@ -10,19 +10,19 @@ class HangmanGame:
     self.guessed_letters = []
     for letter in self.word_to_guess:
       self.guessed_letters.append({'letter': letter, 'status' : False})
-    self.play_game()
+    self._play_game()
     
-  def play_game(self):
+  def _play_game(self):
     while self.remaining_guesses > 0:
       print('You have guessed: {}\n'.format(self.letters_guessed))
-      self.display_board()
-      self.is_winner()
-      self.guess_letter()
+      self._display_board()
+      self._is_winner()
+      self._guess_letter()
       print('\n- - - - - - - - - - - - - - - - - - - -')
     print('Sorry, you lose! The answer was {}'.format(self.word_to_guess))
     sys.exit()
 
-  def is_winner(self):
+  def _is_winner(self):
     winner = True
     for letter in self.guessed_letters:
       if not letter['status']:
@@ -34,33 +34,30 @@ class HangmanGame:
     else:
       return False
 
-  def guess_letter(self):
+  def _guess_letter(self):
     letter = input('Please guess a letter: ').lower()
 
-    if self.incorrect_value(letter):
+    if self._incorrect_value(letter):
       print('{} is not a letter!'.format(letter))
     elif letter in self.letters_guessed:
       print('You already guessed {}!'.format(letter))
     elif letter in word_to_guess:
-      self.add_to_board(letter)
+      self._add_to_board(letter)
       self.letters_guessed.append(letter)
     else:
       self.remaining_guesses -= 1
       self.letters_guessed.append(letter)
       print('Wrong! You have {} guesses left!'.format(self.remaining_guesses))
 
-  def add_to_board(self, letter):
+  def _add_to_board(self, letter):
     for indx, character in enumerate(self.word_to_guess):
       if character == letter:
         self.guessed_letters[indx]['status'] = True
 
-  def incorrect_value(self, letter):
-    if not letter.isalpha() or len(letter) > 1:
-      return True
-    else:
-      return False
+  def _incorrect_value(self, letter):
+    if not letter.isalpha() or len(letter) > 1: return True; return False
 
-  def display_board(self):
+  def _display_board(self):
     board = []
 
     for letter_dict in self.guessed_letters:
