@@ -2,50 +2,63 @@ import sys
 from getpass import getpass
 
 class HangmanGame:
-  complete = False
   letters_guessed = []
   remaining_guesses = 6
   
   def __init__(self, word_to_guess):
     self.word_to_guess = word_to_guess
-    self.guessed_letters = {}
+    self.guessed_letters = []
     for letter in self.word_to_guess:
-      self.guessed_letters[letter] = False
+      self.guessed_letters.append({'letter': letter, 'status' : False})
     
   def play_game(self):
     while self.remaining_guesses > 0:
       self.display_board()
+      self.is_winner()
       self.guess_letter()
+    print('Sorry, you lose! The answer was {}'.format(self.word_to_guess))
+    sys.exit()
+
+  def is_winner(self):
+    winner = True
+    for letter in self.guessed_letters:
+      if not letter['status']:
+        winner = False
+        break
+    if winner:
+      print('Congrats you have won!')
+      sys.exit()
+    else:
+      return False
 
   def guess_letter(self):
     letter = input('Please guess a letter: ').lower()
     if letter in self.letters_guessed:
       print('You already guessed {}!'.format(letter))
     elif letter in word_to_guess:
+      self.add_to_board(letter)
       self.letters_guessed.append(letter)
-      self.guessed_letters[letter] = True
     else:
       self.remaining_guesses -= 1
       print('Wrong! You have {} guesses left!'.format(self.remaining_guesses))
 
+  def add_to_board(self, letter):
+    for indx, character in enumerate(self.word_to_guess):
+      if character == letter:
+        self.guessed_letters[indx]['status'] = True
+
   def display_board(self):
     board = []
-    for letter, status in self.guessed_letters.items():
-      print(letter)
-      if status:
+
+    for letter_dict in self.guessed_letters:
+      letter = letter_dict['letter']
+      if letter_dict['status']:
         board.append(letter)
       else:
         board.append('_')
-    print(board)
-
+    print(' '.join(board))
 
 if __name__ == "__main__":
-  while True:
-    response = input('Want to play a game of hangman? y/n ')
-    if response == 'y' or response == 'Y':
-      word_to_guess = getpass('Please enter a word for the opponent to guess: ')
-      new_game = HangmanGame(word_to_guess)
-      new_game.play_game()
-    else:
-      print('Ok, bye!')
-      sys.exit()
+  word_to_guess = getpass('Please enter a word for the opponent to guess: ')
+  new_game = HangmanGame(word_to_guess)
+  new_game.play_game()
