@@ -11,7 +11,7 @@ class HangmanGame:
 		for letter in self._word_to_guess:
 			self._letters_status.append({'letter': letter, 'status' : False})
 		self._play_game()
-		
+
 	def _play_game(self):
 		while self._remaining_guesses > 0:
 			print('----------------------------------\n\n\n')
