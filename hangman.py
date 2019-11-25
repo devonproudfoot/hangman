@@ -12,6 +12,7 @@ class HangmanGame:
 			self._letters_status.append({'letter': letter, 'status' : False})
 		self._play_game()
 
+
 	def _play_game(self):
 		while self._remaining_guesses > 0:
 			print('----------------------------------\n\n\n')
@@ -21,6 +22,7 @@ class HangmanGame:
 			self._guess_letter()
 		print('Sorry, you lose! The answer was {}'.format(self._word_to_guess))
 		sys.exit()
+
 
 	def _is_winner(self):
 		winner = True
@@ -33,6 +35,7 @@ class HangmanGame:
 			sys.exit()
 		else:
 			return False
+
 
 	def _guess_letter(self):
 		letter = input('Please guess a letter: ').lower()
@@ -49,13 +52,16 @@ class HangmanGame:
 			self._letters_guessed.append(letter)
 			print('Wrong! You have {} guesses left!'.format(self._remaining_guesses))
 
+
 	def _add_to_board(self, letter):
 		for indx, character in enumerate(self._word_to_guess):
 			if character == letter:
 				self._letters_status[indx]['status'] = True
 
+
 	def _incorrect_value(self, letter):
 		if not letter.isalpha() or len(letter) > 1: return True; return False
+
 
 	def _display_board(self):
 		board = []
