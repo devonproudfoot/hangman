@@ -4,11 +4,11 @@ from getpass import getpass
 class HangmanGame:
   
   def __init__(self, word_to_guess, guesses=6):
-    self.word_to_guess = word_to_guess
+    self._word_to_guess = word_to_guess
     self._letters_status = []
     self._letters_guessed = []
     self._remaining_guesses = guesses
-    for letter in self.word_to_guess:
+    for letter in self._word_to_guess:
       self._letters_status.append({'letter': letter, 'status' : False})
     self._play_game()
     
@@ -19,7 +19,7 @@ class HangmanGame:
       self._display_board()
       self._is_winner()
       self._guess_letter()
-    print('Sorry, you lose! The answer was {}'.format(self.word_to_guess))
+    print('Sorry, you lose! The answer was {}'.format(self._word_to_guess))
     sys.exit()
 
   def _is_winner(self):
@@ -41,7 +41,7 @@ class HangmanGame:
       print('{} is not a letter!'.format(letter))
     elif letter in self._letters_guessed:
       print('You already guessed {}!'.format(letter))
-    elif letter in word_to_guess:
+    elif letter in self._word_to_guess:
       self._add_to_board(letter)
       self._letters_guessed.append(letter)
     else:
@@ -50,7 +50,7 @@ class HangmanGame:
       print('Wrong! You have {} guesses left!'.format(self._remaining_guesses))
 
   def _add_to_board(self, letter):
-    for indx, character in enumerate(self.word_to_guess):
+    for indx, character in enumerate(self._word_to_guess):
       if character == letter:
         self._letters_status[indx]['status'] = True
 
