@@ -18,6 +18,10 @@ class HangmanGame
 		while remaining_guesses > 0
 			guess = prompt_guess
 
+			if valid_guess?(guess)
+				
+
+			end 
 		end
 	end
 
@@ -28,6 +32,10 @@ class HangmanGame
 	def prompt_guess
 		puts 'Enter your guess: '
 		guess = gets.chomp.lower
+	end
+
+	def valid_guess?(guess)
+		guess.length == 1 || guess =~ /[[:alpha:]]/ ? true : false
 	end
 
 end
