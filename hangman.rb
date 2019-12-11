@@ -1,5 +1,5 @@
 class HangmanGame
-	attr_reader :word
+	attr_reader :word, :correct_guesses
 
 	def initialize(word, guesses=6)
 		@word = word
@@ -16,6 +16,7 @@ class HangmanGame
 
 	def play_game
 		while remaining_guesses > 0
+			display_board
 			guess = prompt_guess
 
 			if valid_guess?(guess)
@@ -25,8 +26,26 @@ class HangmanGame
 		end
 	end
 
+	def guess_letter
+
+	end
+
 	def correct_guess?(letter)
 		letter in @word ? true : false
+	end
+
+	def display_board
+		board = []
+
+		@correct_guesses.each do |letter_hash|
+			if letter_hash['guessed']
+				board.push(letter_hash['letter'])
+			else
+				board.push('_')
+			end
+		end
+
+		puts board.join(' ')
 	end
 
 	def prompt_guess
