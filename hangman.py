@@ -1,10 +1,10 @@
 import sys
-from getpass import getpass
 
 class HangmanGame:
-	
+
+
 	def __init__(self, word_to_guess, guesses=6):
-		self._word_to_guess = word_to_guess
+		self._word_to_guess = word_to_guess.lower()
 		self._letters_status = []
 		self._letters_guessed = []
 		self._remaining_guesses = guesses
@@ -60,7 +60,10 @@ class HangmanGame:
 
 
 	def _incorrect_value(self, letter):
-		if not letter.isalpha() or len(letter) > 1: return True; return False
+		if not letter.isalpha() or len(letter) >1:
+			return True
+		else:
+			return False
 
 
 	def _display_board(self):
@@ -72,8 +75,4 @@ class HangmanGame:
 				board.append(letter)
 			else:
 				board.append('_')
-		print(' '.join(board))
-
-if __name__ == "__main__":
-	word_to_guess = getpass('Please enter a word for the opponent to guess: ')
-	new_game = HangmanGame(word_to_guess)
+		print(' '.join(board)) 
