@@ -17,8 +17,7 @@ class HangmanGame:
 			self._display_board()
 			self._is_winner()
 			self._guess_letter()
-		print('Sorry, you lose! The answer was {}'.format(self._word_to_guess))
-		sys.exit()
+		self._handle_losses()
 
 
 	def set_new_word(self, new_word):
@@ -32,10 +31,19 @@ class HangmanGame:
 				winner = False
 				break
 		if winner:
-			print('Congrats you have won!')
-			sys.exit()
+			self._handle_wins()
 		else:
 			return False
+
+
+	def _handle_wins(self):
+		print('Congrats you have won!')
+		sys.exit()
+
+
+	def _handle_losses(self):
+		print('Sorry, you lose! The answer was {}'.format(self._word_to_guess))
+		sys.exit()
 
 
 	def _guess_letter(self):
