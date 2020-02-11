@@ -32,8 +32,6 @@ class HangmanGame:
 				break
 		if winner:
 			self._handle_wins()
-		else:
-			return False
 
 
 	def _handle_wins(self):
