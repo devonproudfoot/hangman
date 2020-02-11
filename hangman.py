@@ -5,11 +5,9 @@ class HangmanGame:
 
 	def __init__(self, word_to_guess, guesses=6):
 		self._word_to_guess = word_to_guess.lower()
-		self._letters_status = []
+		self._letters_status = self._create_letter_status()
 		self._letters_guessed = []
 		self._remaining_guesses = guesses
-		for letter in self._word_to_guess:
-			self._letters_status.append({'letter': letter, 'status' : False})
 
 
 	def play_game(self):
@@ -78,4 +76,11 @@ class HangmanGame:
 				board.append(letter)
 			else:
 				board.append('_')
-		print(' '.join(board)) 
+		print(' '.join(board))
+
+
+	def _create_letter_status(self):
+		letters_status = []
+		for letter in self._word_to_guess:
+			letters_status.append({'letter': letter, 'status' : False})
+		return letters_status
