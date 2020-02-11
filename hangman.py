@@ -23,6 +23,10 @@ class HangmanGame:
 		sys.exit()
 
 
+	def set_new_word(self, new_word):
+		self.word = new_word
+
+
 	def _is_winner(self):
 		winner = True
 		for letter in self._letters_status:
