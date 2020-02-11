@@ -10,10 +10,9 @@ class HangmanGame:
 		self._remaining_guesses = guesses
 		for letter in self._word_to_guess:
 			self._letters_status.append({'letter': letter, 'status' : False})
-		self._play_game()
 
 
-	def _play_game(self):
+	def play_game(self):
 		while self._remaining_guesses > 0:
 			print('----------------------------------\n\n\n')
 			print('You have guessed: {}\n'.format(self._letters_guessed))
